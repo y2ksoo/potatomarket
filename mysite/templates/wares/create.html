@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    새 상품 추가
+{% endblock page_title %}
+
+{% block content %}
+    <h2>새 상품을 추가해 주세요</h2>
+
+    <form method="POST" action="{% url "wares:create" %}">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>등록</button>
+    </form>
+
+{% endblock content %}

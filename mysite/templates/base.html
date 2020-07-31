@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+        content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}
+        {% endblock page_title %}</title>
+</head>
+<body>
+    <h1> <a href={% url "home" %}>Potato Market!</a> </h1>
+
+    <h3> <a href={% url "wares:create" %}>새상품 등록1</a></h3>
+    <h3> <a href={% url "wares:create2" %}>새상품 등록2</a></h3>
+
+    {% block content %}
+    {% endblock content %}
+
+    {% include "footer.html"%}
+</body>
+</html>

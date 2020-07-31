@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    {{ware.name}}
+{% endblock page_title %}
+
+{% block content %}
+    <h3>상품명: {{ware.name}}</h3>
+    <h3>가격: {{ware.price}}  원</h3>
+    <h3>지역: {{ware.city}}</h3>
+    <h3>거래방식: 
+        {% for c in ware.category.all %}
+            {{c}}, 
+        {% endfor %}
+    </h3>
+    <h3>판매자: {{ware.seller}}</h3>
+    <h3>상품소개: {{ware.description}}</h3>
+{% endblock content %}

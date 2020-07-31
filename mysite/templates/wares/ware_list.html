@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Potato Market
+{% endblock page_title %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ware in wares %}
+            <tr>
+                <td>
+                    <a href={% url "wares:detail" ware.pk %}>{{ware.name}}</a>
+                </td>
+                <td>{{ware.price}}</td>
+                <td>{{ware.city}}</td>              
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
