@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <form method="POST" action="{% url "users:signup" %}">
+        {% csrf_token %}
+        {{form.first_name}}
+        {{form.last_name}}
+        {{form.email}}
+
+
+        {% if form.errors %}
+
+            {% for e in form.errors %}
+                {{e}}
+            {% endfor %}
+
+        {% endif %}
+
+
+        {% if form.email.errors %}
+
+            {% for e in form.email.errors %}
+                {{e}}
+            {% endfor %}
+
+        {% endif %}
+
+        {{form.password}}
+        {{form.password1}}
+        <button>Sign up</button>
+    </form>
+
+    <div class="mt-5">
+            <span>Have an account?</span>
+            <a href="{% url 'users:login' %}">Log in</a>
+        </div>
+
+</div>
+{% endblock content %} 

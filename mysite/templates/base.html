@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +10,15 @@
         {% endblock page_title %}</title>
 </head>
 <body>
+    <img src={% static "img/logo.jpeg" %} />
     <h1> <a href={% url "home" %}>Potato Market!</a> </h1>
+    {% if user.is_authenticated %}
+        <h3> <a href={% url "users:logout" %}>로그아웃</a> </h2>
+    {% else %}
+        <h3> <a href={% url "users:login" %}>로그인</a> </h2>
+        <h3> <a href={% url "users:signup" %}>회원가입</a></h2>
+    {% endif %}
 
-    <h3> <a href={% url "wares:create" %}>새상품 등록1</a></h3>
-    <h3> <a href={% url "wares:create2" %}>새상품 등록2</a></h3>
 
     {% block content %}
     {% endblock content %}

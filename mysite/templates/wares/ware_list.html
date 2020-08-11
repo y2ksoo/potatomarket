@@ -5,9 +5,13 @@
 {% endblock page_title %}
 
 {% block content %}
+
+    <h3> <a href={% url "wares:create" %}>새상품 등록1</a></h3>
+
     <table>
         <thead>
             <tr>
+                <th>Photo</th>
                 <th>Product</th>
                 <th>Price</th>
                 <th>City</th>
@@ -16,6 +20,7 @@
         <tbody>
             {% for ware in wares %}
             <tr>
+                <td><img src = {{ware.photo.url}} /> </td>
                 <td>
                     <a href={% url "wares:detail" ware.pk %}>{{ware.name}}</a>
                 </td>

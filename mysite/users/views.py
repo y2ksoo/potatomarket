@@ -1,13 +1,13 @@
 from django.views.generic import FormView
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from . import forms
 
 class SignupView(FormView):
-    template_name = "signup.html"
+    template_name = "users/signup.html"
     form_class = forms.SignUpForm
-    success_url = reverse_lazy("core:home")
+    success_url = reverse_lazy("home")
 
     def form_valid(self, form):
         form.save()
@@ -20,9 +20,9 @@ class SignupView(FormView):
 
 class LoginView(FormView):
 
-    template_name = "login.html"
+    template_name = "users/login.html"
     form_class = forms.LoginForm
-    success_url = reverse_lazy("core:home")
+    success_url = reverse_lazy("home")
 
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
@@ -31,3 +31,7 @@ class LoginView(FormView):
         if user is not None:
             login(self.request, user)
         return super().form_valid(form)
+
+def log_out(request):
+    logout(request)
+    return redirect(reverse("home"))

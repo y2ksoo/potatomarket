@@ -16,9 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from wares import views as ware_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("", ware_views.HomeView.as_view(), name="home"),
     path("wares/", include("wares.urls", namespace="wares")),
+    path("users/", include("users.urls", namespace="users")),
     path('admin/', admin.site.urls),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

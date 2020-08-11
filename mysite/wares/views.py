@@ -21,24 +21,19 @@ class WareDetail(DetailView):
 
 
 class WareCreate(CreateView):
+    form_class = forms.WareForm
     model = models.Ware
     template_name = "wares/create.html"
-    fields = ['name', 'description', 'price', 'city', 'seller', 'category']
     success_url = reverse_lazy("home")
 
 
-class CreateWare(FormView):
+# class CreateWare(FormView):
 
-    template_name = "wares/create2.html"
-    form_class = forms.WareForm
-    success_url = reverse_lazy("home")
-    
-    def form_invalid(self, form):
-        print("Error!")
-        print(form.error)
+#     template_name = "wares/create2.html"
+#     form_class = forms.WareForm
+#     success_url = reverse_lazy("home")
 
-    def form_vaild(self, form):
-        print(form.cleaned_data)
-        form.save()
-        return super().form_valid(form)
+#     def form_vaild(self, form):
+#         form.save()
+#         return super().form_valid(form)
     

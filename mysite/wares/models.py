@@ -17,9 +17,22 @@ class Category(BasicModel):
         return self.name
 
 
+# class Photo(BasicModel):
+
+#     caption = models.CharField(max_length=80)
+#     file = models.ImageField(upload_to="ware_photos")
+#     wares = models.ForeignKey(
+#         "Ware", related_name='photos', on_delete=models.CASCADE, blank=True
+#         )
+
+#     def __str__(self):
+#         return self.caption
+
+
 class Ware(BasicModel):
     
     name = models.CharField(max_length=140)
+    photo = models.ImageField(upload_to="ware_photos")
     description = models.TextField()
     price = models.IntegerField()
     city = models.CharField(max_length=80)
@@ -31,4 +44,3 @@ class Ware(BasicModel):
 
     def count(self):
         return self.count
-
