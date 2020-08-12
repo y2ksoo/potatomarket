@@ -6,28 +6,27 @@
 
 {% block content %}
 
-    <h3> <a href={% url "wares:create" %}>새상품 등록1</a></h3>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Photo</th>
-                <th>Product</th>
-                <th>Price</th>
-                <th>City</th>
-            </tr>
-        </thead>
-        <tbody>
+    
+    <div>
+        <div>
             {% for ware in wares %}
-            <tr>
-                <td><img src = {{ware.photo.url}} /> </td>
-                <td>
-                    <a href={% url "wares:detail" ware.pk %}>{{ware.name}}</a>
-                </td>
-                <td>{{ware.price}}</td>
-                <td>{{ware.city}}</td>              
-            </tr>
+
+                {% include 'wares/ware_card.html' with ware=ware %}
+
             {% endfor %}
-        </tbody>
-    </table>
+        </div>
+
+        <div>
+            {% if page_obj.has_previous%}
+                <a href="?page={{page_obj.number|add:-1}}">이전페이지</a>
+            {% endif %}
+
+            <span>{{page_obj.number}} 중 {{page_obj.paginator.num_pages}}</span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{page_obj.number|add:1}}">다음페이지</a>
+            {% endif %}
+        </div>
+    </div>
+  
 {% endblock content %}

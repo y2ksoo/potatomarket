@@ -3,9 +3,8 @@
 <div>
     <form method="POST" action="{% url "users:login" %}">
         {% csrf_token %}
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <button>Login</button>
+        {{ form.as_p }}
+        <button>로그인</button>
     </form>
 </div>
 {% endblock content %}

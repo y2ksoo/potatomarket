@@ -4,30 +4,7 @@
 <div>
     <form method="POST" action="{% url "users:signup" %}">
         {% csrf_token %}
-        {{form.first_name}}
-        {{form.last_name}}
-        {{form.email}}
-
-
-        {% if form.errors %}
-
-            {% for e in form.errors %}
-                {{e}}
-            {% endfor %}
-
-        {% endif %}
-
-
-        {% if form.email.errors %}
-
-            {% for e in form.email.errors %}
-                {{e}}
-            {% endfor %}
-
-        {% endif %}
-
-        {{form.password}}
-        {{form.password1}}
+        {{ form.as_p }}
         <button>Sign up</button>
     </form>
 

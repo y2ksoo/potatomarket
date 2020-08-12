@@ -1,0 +1,8 @@
+<span>
+    <a href={% url "wares:detail" ware.pk %}>
+        <img src = {{ware.photo.url}} /> 
+        <div>{{ware.name}}</div>    
+        <div>{{ware.city}}</div>
+        <div>{{ware.price}}</div>
+    </a>
+</span>
