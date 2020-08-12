@@ -6,12 +6,13 @@
 
 {% block content %}
 
+    <img src = {{ware.photo.url}} /> 
     <h3>상품명: {{ware.name}}</h3>
     <h3>가격: {{ware.price}}  원</h3>
     <h3>지역: {{ware.city}}</h3>
     <h3>거래방식: 
         {% for c in ware.category.all %}
-            {{c}}, 
+            {{c}}  
         {% endfor %}
     </h3>
     <h3>판매자: {{ware.seller}}</h3>

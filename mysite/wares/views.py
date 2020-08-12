@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView, CreateView, FormView
+from django.views.generic import View, ListView, DetailView, CreateView, FormView
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.core.paginator import Paginator
@@ -27,13 +27,57 @@ class WareCreate(CreateView):
     success_url = reverse_lazy("home")
 
 
-# class CreateWare(FormView):
+class SearchView(View):
 
-#     template_name = "wares/create2.html"
-#     form_class = forms.WareForm
-#     success_url = reverse_lazy("home")
+    def get(self, request):
 
-#     def form_vaild(self, form):
-#         form.save()
-#         return super().form_valid(form)
+        city = request.GET.get("city")
+
+        if city:
+
+            form = forms.SearchForm(request.GET)
+
+            if form.is_valid():
+                
+                city = form.cleaned_data.get("city")
+                name = form.cleaned_data.get("name")
+                price = form.cleaned_data.get("price")
+                # seller = form.cleaned_data.get("seller")
+                categories = form.cleaned_data.get("category")
+
+                filter_args = {}
+
+                if city != "모든지역":
+                    filter_args["city__startswith"] = city
+
+                if name is not None:
+                    filter_args["name__startswith"] = name
+
+                if price is not None:
+                    filter_args["price__lte"] = price
+
+                # if seller is not None:
+                #     filter_args["seller__startswith"] = seller
+                
+                for category in categories:
+                    filter_args["category"] = category
+
+                qs = models.Ware.objects.filter(**filter_args).order_by("-created")
+                
+                paginator = Paginator(qs, 4)
+                page = request.GET.get("page", 1)
+                wares = paginator.get_page(page)
+
+                return render(
+                    request, "wares/search.html", {"form": form, "wares": wares}
+                )
+
+        else:
+            form = forms.SearchForm()
+
+        return render(
+                    request, "wares/search.html", {"form": form}
+                )
+
+
     

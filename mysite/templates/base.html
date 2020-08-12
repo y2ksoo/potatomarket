@@ -9,13 +9,17 @@
     <title>{% block page_title %}
         {% endblock page_title %}</title>
 </head>
-<body>
-    
-    <h1> <a href={% url "home" %}> 
-        <img src={% static "img/logo.jpeg" %} width=70px/>
-        Potato Market!
-        </a> 
-    </h1>
+<body>    
+    <div>
+        <h1> <a href={% url "home" %}> 
+            <img src={% static "img/logo.jpeg" %} width=70px/>
+            Potato Market!
+            </a> 
+        </h1>
+        <form method="get" action="{% url "wares:search" %}">
+            <input type="text" name="city"></input> <button>Search</button>
+        </form>
+    </div>
     {% if user.is_authenticated %}
         <h3> <a href={% url "users:logout" %}>로그아웃</a> </h3>
         <h3> <a href={% url "wares:create" %}>새상품 등록1</a></h3>

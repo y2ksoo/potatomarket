@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Search
+{% endblock page_title %}
+
+{% block content %}
+
+    <h2>Search!</h2>
+
+    <form method="get" action="{% url "wares:search" %}">
+        {{form.as_p}}
+        <button>Search</button>
+    </form>
+
+    <h3>Results</h3>
+
+    {% for ware in wares %}
+        
+        {% include 'wares/ware_card.html' with ware=ware %}
+        
+    {% endfor %}
+
+{% endblock content %}
