@@ -25,8 +25,7 @@ class SignupView(CreateView):
 class UserLoginView(LoginView):
     template_name = "users/login.html"
     success_url = reverse_lazy("home")
-    redirect_field_name = 
-    
+ 
     #     print("hello valid")
     #     username = form.cleaned_data.get("username")
     #     password = form.cleaned_data.get("password")
