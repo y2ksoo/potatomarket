@@ -6,32 +6,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" 
         content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:400&display=swap&subset=korean">
     <title>{% block page_title %}
         {% endblock page_title %}</title>
 </head>
-<body>    
-    <div>
-        <h1> <a href={% url "home" %}> 
-            <img src={% static "img/logo.jpeg" %} width=70px/>
-            Potato Market!
-            </a> 
-        </h1>
-        <form method="get" action="{% url "wares:search" %}">
-            <input type="text" name="city"></input> <button>Search</button>
-        </form>
+<body class="text-gray-800">    
+    <header class="container max-w-full flex items-center justify-between px-6 h-22 border-b border-gray-400">
+        <div class="flex items-center w-3/5">
+            <a href={% url "home" %}> 
+                <div class="flex items-center ">
+                    <img class="w-10" src={% static "img/logo.jpeg" %}/>
+                </div>
+            </a>
+            <a href={% url "home" %}> 
+                <div class="flex items-center mr-6 font-potato text-yellow-900 text-3xl w-32">감자마켓</div>
+            </a>          
+            <form class="w-3/4" method="get" action="{% url "wares:search" %}" >
+                <input class="search-box border px-5 w-3/4 font-medium text-gray-900 placeholder-gray-600 py-3 rounded-sm shadow-md hover:shadow-lg focus:outline-none" type="text" name="city" placeholder="동 이름으로 검색"></input> 
+            </form>
+        </div>
+        <ul class="flex items-center text-sm font-medium font-bold">    
+            {% if user.is_authenticated %}
+                <li class="nav_link"> <a href={% url "users:logout" %}>로그아웃</a> </li> 
+                <li class="nav_link"> <a href={% url "wares:create" %}>새상품 등록1</a> </li>
+            {% else %}
+                <li class="nav_link"> <a href={% url "users:login" %}>로그인</a> </li>
+                <li class="nav_link"> <a href={% url "users:signup" %}>회원가입</a> </li>
+            {% endif %}
+        </ul>
+    </header>
+
+    <div class="my-8 mx-20">
+        {% block content %}
+        {% endblock content %}
     </div>
-    {% if user.is_authenticated %}
-        <h3> <a href={% url "users:logout" %}>로그아웃</a> </h3>
-        <h3> <a href={% url "wares:create" %}>새상품 등록1</a></h3>
-    {% else %}
-        <h3> <a href={% url "users:login" %}>로그인</a> 
-         <a href={% url "users:signup" %}>회원가입</a></h3>
-    {% endif %}
-
-
-    {% block content %}
-    {% endblock content %}
-
-    {% include "footer.html"%}
+    <div class="py-6 px-20 bg-gray-700 text-gray-300 font-bold">
+        {% include "footer.html"%}
+    </div>
 </body>
+
 </html>
