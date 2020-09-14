@@ -34,7 +34,7 @@ class Ware(BasicModel):
     name = models.CharField(max_length=140)
     photo = models.ImageField(upload_to="ware_photos")
     description = models.TextField()
-    price = models.IntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=0)
     city = models.CharField(max_length=80)
     seller = models.ForeignKey("users.User", related_name="ware", on_delete=models.CASCADE)
     category = models.ManyToManyField("Category", related_name="ware", blank=True)

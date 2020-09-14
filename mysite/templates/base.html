@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static "css/styles.css" %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:400&display=swap&subset=korean">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <title>{% block page_title %}
         {% endblock page_title %}</title>
 </head>
@@ -38,10 +39,11 @@
         </ul>
     </header>
 
-    <div class="my-8 mx-20">
+    <div class="py-10 bg-gray-200">
         {% block content %}
         {% endblock content %}
     </div>
+
     <div class="py-6 px-20 bg-gray-700 text-gray-300 font-bold">
         {% include "footer.html"%}
     </div>

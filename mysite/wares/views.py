@@ -8,7 +8,7 @@ from . import models, forms
 class HomeView(ListView):
 
     model = models.Ware
-    paginate_by = 4
+    paginate_by = 6
     ordering = "created"
     context_object_name = "wares"
 

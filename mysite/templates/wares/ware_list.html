@@ -7,8 +7,9 @@
 {% block content %}
 
     
-    <div>
-        <div>
+    <div class="container items-center mx-auto rounded-lg bg-center bg-white">
+        <div class="font-bold text-lg mx-12 pt-10" >인기 중고</div>
+        <div class="flex flex-wrap mx-5 pt-5">
             {% for ware in wares %}
 
                 {% include 'wares/ware_card.html' with ware=ware %}
@@ -16,15 +17,19 @@
             {% endfor %}
         </div>
 
-        <div>
+        <div class="font-bold text-lg mx-12 pb-2">
             {% if page_obj.has_previous%}
-                <a href="?page={{page_obj.number|add:-1}}">이전페이지</a>
+                <a href="?page={{page_obj.number|add:-1}}">
+                    <i class="fas fa-arrow-circle-left"></i>
+                </a>
             {% endif %}
 
-            <span>{{page_obj.number}} 중 {{page_obj.paginator.num_pages}}</span>
+            <span>{{page_obj.number}} / {{page_obj.paginator.num_pages}}</span>
 
             {% if page_obj.has_next %}
-                <a href="?page={{page_obj.number|add:1}}">다음페이지</a>
+                <a href="?page={{page_obj.number|add:1}}">
+                    <i class="fas fa-arrow-circle-right"></i>
+                </a>
             {% endif %}
         </div>
     </div>

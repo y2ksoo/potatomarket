@@ -1,20 +1,28 @@
 {% extends "base.html" %}
+{% load humanize %}
 
 {% block page_title %}
     {{ware.name}}
 {% endblock page_title %}
 
 {% block content %}
+    <div class="container mx-auto rounded-lg bg-center bg-white">
+        <div class="pt-10 font-bold text-lg mx-12 pb-2">
+            <img class="" src="{{ware.photo.url}}"/>
+            <i class= "pt-10 fas fa-user-circle"></i> 
+            <span>{{ware.seller}}</span>
+            <span class="text-sm text-gray-600"> {{ware.city}}</span>
+            <div class="mt-5 border-t"></div>            
+            <div class="mt-5">{{ware.name}}</div>
+            <span class="text-sm text-gray-600"> {{ware.created|timesince}} 전 등록됨 </span>
+            <h3 class="pt-5">{{ware.price|intcomma}} 원</h3>            
+            <h3>
+                {% for c in ware.category.all %}
+                    {{c}}  
+                {% endfor %}
+            </h3>           
+        </div>
+         <div class="mt-3 font-bold mx-12 pb-10">{{ware.description}}</div>
+    </div>
 
-    <img src = {{ware.photo.url}} /> 
-    <h3>상품명: {{ware.name}}</h3>
-    <h3>가격: {{ware.price}}  원</h3>
-    <h3>지역: {{ware.city}}</h3>
-    <h3>거래방식: 
-        {% for c in ware.category.all %}
-            {{c}}  
-        {% endfor %}
-    </h3>
-    <h3>판매자: {{ware.seller}}</h3>
-    <h3>상품소개: {{ware.description}}</h3>
 {% endblock content %}
