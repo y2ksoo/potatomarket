@@ -13,10 +13,21 @@ class User(AbstractUser):
         (GENDER_OTHER, "Other"),
     )
 
+    LOGING_POTATO = "potato"
+    LOGING_KAKAO = "kakao"
+
+    LOGIN_CHOICES = (
+        (LOGING_POTATO, "potato"),
+        (LOGING_KAKAO, "Kakao"),
+    )
+
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
     bio = models.TextField(default="", blank=True)
     birthdate = models.DateField(blank=True, null=True)
     trustseller = models.BooleanField(('trust seller'), default=False)
+    login_method = models.CharField(
+        max_length=50, choices=LOGIN_CHOICES, default=LOGING_POTATO
+    )
 
     def __str__(self):
         return self.username

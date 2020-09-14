@@ -10,6 +10,8 @@ pylint = "*"
 django = "==2.2.14"
 pillow = "*"
 pylint = "*"
+requests = "*"
+django-dotenv = "*"
 
 [requires]
 python_version = "3.7"
