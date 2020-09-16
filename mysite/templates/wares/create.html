@@ -1,19 +1,39 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-    새 상품 추가
+    새 물품 추가
 {% endblock page_title %}
 
 {% block content %}
 <div class="container items-center mx-auto rounded-lg bg-center bg-white">
-    <div class="font-bold text-lg mx-12 pt-10" >새 상품을 추가해 주세요</div>
+    <div class="font-bold text-lg mx-12 pt-10" >새 물품을 추가해 주세요</div>
 
-    <form class="w-full px-10 py-5" method="POST" action="{% url "wares:create" %}">
+    <form class="w-full px-10 py-5" method="POST" action="{% url "wares:create" %}" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form.as_p}}
-        <!-- <label for="id_name"></label>
-        <input id="id_name" type="text" name="name" placeholder="상품명" class="input_ware mb-3"> -->
-        <button>등록</button>
+        {% comment %} {{form.as_p}} {% endcomment %}
+
+        <label for="id_name"></label>
+        <input id="id_name" type="text" name="name" placeholder="물품명" class="input_ware mb-3">
+        <label for="id_price"></label>
+        <input id="id_price" type="number" name="price" placeholder="가격(원)" min="0" step="100" class="input_ware mb-3">
+        <label for="id_city"></label>
+        <input id="id_city" type="text" name="city" placeholder="지역(동 이름)" class="input_ware mb-3">
+        <label for="id_description"></label>
+        {% comment %} {{form.description}} {% endcomment %}
+        {% comment %} <textarea id="id_description" cols="20" rows="5" name="decription" placeholder="물품 상세 설명" class="input_ware pb-24 mb-3"> </textarea> {% endcomment %}
+        <textarea name="description" cols="20" rows="10" required id="id_description" class="input_ware pb-24 mb-3"></textarea>
+        <label for="id_category">[판매방식]</label>
+        <div class="my-1"></div>
+            {{ form.category }}         
+        <div class="my-2"></div>
+
+        <label for="id_photo">[사진등록]</label>
+        <div class="my-1"></div>
+            {{ form.photo }}
+        <div class="my-5"></div> 
+        
+        
+        <button class="btn self-center w-32 font-bold bg-yellow-500">등록</button>
     </form>
 </div>
 {% endblock content %}

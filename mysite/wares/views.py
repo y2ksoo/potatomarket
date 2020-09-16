@@ -1,8 +1,10 @@
 from django.views.generic import View, ListView, DetailView, CreateView, FormView
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.core.paginator import Paginator
 from django.contrib.auth import authenticate
+from django.contrib import messages
+from users.models import User
 from . import models, forms
 
 class HomeView(ListView):
@@ -22,10 +24,21 @@ class WareDetail(DetailView):
 
 class WareCreate(CreateView):
     form_class = forms.WareForm
-    model = models.Ware
+    # model = models.Ware
+    # context_object_name = "wares"
     template_name = "wares/create.html"
     success_url = reverse_lazy("home")
 
+    def form_valid(self, form):
+        ware = form.save()
+        user = User.objects.get(username=self.request.user)
+        ware.seller_id = user.id
+        ware.save()
+        messages.success(self.request, "물품이 등록되었습니다.")
+        return redirect(reverse("home"))
+
+    def form_invalid(self, form):         
+        return super().form_invalid(form)
 
 class SearchView(View):
 

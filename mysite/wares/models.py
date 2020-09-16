@@ -36,7 +36,7 @@ class Ware(BasicModel):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=0)
     city = models.CharField(max_length=80)
-    seller = models.ForeignKey("users.User", related_name="ware", on_delete=models.CASCADE)
+    seller = models.ForeignKey("users.User", related_name="ware", on_delete=models.CASCADE, blank=True, null=True)
     category = models.ManyToManyField("Category", related_name="ware", blank=True)
 
     def __str__(self):

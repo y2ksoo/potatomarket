@@ -13,7 +13,8 @@
     <title>{% block page_title %}
         {% endblock page_title %}</title>
 </head>
-<body class="text-gray-800">    
+<body class="text-gray-800">   
+    {% include "partials/message.html" %} 
     <header class="container max-w-full flex items-center justify-between px-6 h-22 border-b border-gray-400">
         <div class="flex items-center w-3/5">
             <a href={% url "home" %}> 
@@ -31,7 +32,7 @@
         <ul class="flex items-center text-sm font-medium font-bold">    
             {% if user.is_authenticated %}
                 <li class="nav_link"> <a href={% url "users:logout" %}>로그아웃</a> </li> 
-                <li class="nav_link"> <a href={% url "wares:create" %}>상품등록</a> </li>
+                <li class="nav_link"> <a href={% url "wares:create" %}>물품등록</a> </li>
             {% else %}
                 <li class="nav_link"> <a href={% url "users:login" %}>로그인</a> </li>
                 <li class="nav_link"> <a href={% url "users:signup" %}>회원가입</a> </li>
@@ -43,9 +44,8 @@
         {% block content %}
         {% endblock content %}
     </div>
-
     <div class="py-6 px-20 bg-gray-700 text-gray-300 font-bold">
-        {% include "footer.html"%}
+        {% include "partials/footer.html"%}
     </div>
 </body>
 

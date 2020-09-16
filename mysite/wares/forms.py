@@ -16,11 +16,15 @@ class SearchForm(forms.Form):
 class WareForm(forms.ModelForm):
     class Meta:
         model = models.Ware
-        fields = ['name', 'description', 'price', 'city', 'seller', 'category'] 
+        fields = ['name', 'description', 'price', 'city', 'category', 'photo'] 
         widgets = {
+            'description': forms.Textarea(attrs={"rows":10, "cols":20}),
             'category': forms.CheckboxSelectMultiple(),
         }
 
-    def save(self, *args, **kwargs):
-        ware = super().save(*args, **kwargs) # Call the real save() method
-        ware.save()
+    # def save(self, *args, **kwargs):        
+    #     ware = super().save(commit=False) # Call the real save() method
+    #     print(self)
+    #     print(args)
+
+    #     ware.save()
