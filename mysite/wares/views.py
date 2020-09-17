@@ -45,8 +45,10 @@ class SearchView(View):
     def get(self, request):
 
         city = request.GET.get("city")
+        name = request.GET.get("name")
+        print(name)
 
-        if city:
+        if city or name:
 
             form = forms.SearchForm(request.GET)
 
@@ -54,9 +56,9 @@ class SearchView(View):
                 
                 city = form.cleaned_data.get("city")
                 name = form.cleaned_data.get("name")
-                price = form.cleaned_data.get("price")
+                # price = form.cleaned_data.get("price")
                 # seller = form.cleaned_data.get("seller")
-                categories = form.cleaned_data.get("category")
+                # categories = form.cleaned_data.get("category")
 
                 filter_args = {}
 
@@ -66,14 +68,14 @@ class SearchView(View):
                 if name is not None:
                     filter_args["name__startswith"] = name
 
-                if price is not None:
-                    filter_args["price__lte"] = price
+                # if price is not None:
+                #     filter_args["price__lte"] = price
 
                 # if seller is not None:
                 #     filter_args["seller__startswith"] = seller
                 
-                for category in categories:
-                    filter_args["category"] = category
+                # for category in categories:
+                #     filter_args["category"] = category
 
                 qs = models.Ware.objects.filter(**filter_args).order_by("-created")
                 

@@ -29,8 +29,9 @@
                 <input class="search-box border px-5 w-3/4 font-medium text-gray-900 placeholder-gray-600 py-3 rounded-sm shadow-md hover:shadow-lg focus:outline-none" type="text" name="city" placeholder="동 이름으로 검색"></input> 
             </form>
         </div>
-        <ul class="flex items-center text-sm font-medium font-bold">    
+        <ul class="flex items-center text-sm font-medium font-bold">             
             {% if user.is_authenticated %}
+                <li class="nav_link"> <a href={% url "home" %}>{{ user.username }}님</a></li>
                 <li class="nav_link"> <a href={% url "users:logout" %}>로그아웃</a> </li> 
                 <li class="nav_link"> <a href={% url "wares:create" %}>물품등록</a> </li>
             {% else %}

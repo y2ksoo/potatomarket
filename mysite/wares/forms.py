@@ -3,10 +3,9 @@ from . import models
 
 
 class SearchForm(forms.Form):
-    city = forms.CharField(initial="모든지역")
+    city = forms.CharField(initial="모든지역", required=False)
     name = forms.CharField(required=False)
     price = forms.IntegerField(required=False)
-    # seller = forms.CharField(required=False)
     category = forms.ModelMultipleChoiceField(
         required=False,
         queryset=models.Category.objects.all(),
