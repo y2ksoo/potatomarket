@@ -25,7 +25,7 @@ SECRET_KEY = '@$2)zhmdojii*yrwispi5@jqkn-58chlp6=$$!b56r7gwq!c0!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['potatomarket.eba-52aymfcn.ap-northeast-2.elasticbeanstalk.com']
 
 
 # Application definition
